@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import snippets = require('./icons.json');
-declare const window: any, document: any, acquireVsCodeApi: any;
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -34,6 +33,22 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           vscode.window.showErrorMessage(data.value);
+          break;
+        }
+        case "addText": {
+          if (!data.value) {
+            return;
+          }
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+              const document = editor.document;
+              editor.edit(editBuilder => {
+                  editor.selections.forEach(sel => {
+                  const position = editor.selection.active;
+                  editBuilder.insert(position, snippets[data.value].body);
+                  })
+              })
+          }
           break;
         }
       }
@@ -97,6 +112,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 width: 100%;
               }
               </style>
+              <script>
+              const tsvscode = acquireVsCodeApi();
+              </script>
           </head>
           <body>
               <h1>SVG Icons</h1>
@@ -142,18 +160,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     });
   }
   function addSnippet(name){
-    const vscode = acquireVsCodeApi();
-    vscode.window.showInformationMessage('Not Working Yet -.-');
-    const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            const document = editor.document;
-            editor.edit(editBuilder => {
-                editor.selections.forEach(sel => {
-                const position = editor.selection.active;
-                editBuilder.insert(position, 'text');
-              })
-            })
-        }
+    tsvscode.postMessage({type: 'addText', value: name});
   }
   (function(){
     document.querySelector('input').focus();
