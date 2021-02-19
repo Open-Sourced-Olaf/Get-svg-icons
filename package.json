@@ -60,11 +60,6 @@
                 "command": "get-svg-icons.showIcon",
                 "category": "Get SVG Icons",
                 "title": "Show Icons"
-            },
-            {
-                "command": "get-svg-icons.insertText",
-                "category": "Get SVG Icons",
-                "title": "Sample command"
             }
         ]
     },

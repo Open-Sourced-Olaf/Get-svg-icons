@@ -17,19 +17,6 @@ const SidebarProvider_1 = require("./SidebarProvider");
 function activate(context) {
     const sidebarProvider = new SidebarProvider_1.SidebarProvider(context.extensionUri);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider("get-svg-icons-sidebar", sidebarProvider));
-    let disposable2 = vscode.commands.registerCommand('get-svg-icons.insertText', function () {
-        // Get the active text editor
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            const document = editor.document;
-            editor.edit(editBuilder => {
-                editor.selections.forEach(sel => {
-                    const position = editor.selection.active;
-                    editBuilder.insert(position, 'text');
-                });
-            });
-        }
-    });
     const metaPath = path.resolve(__dirname, "../snippets/bootstrap-icons.json");
     const getMetaData = () => new Promise((resolve, reject) => {
         fs.readFile(metaPath, (err, data) => {
@@ -51,13 +38,13 @@ function activate(context) {
                 let linePrefix = document
                     .lineAt(position)
                     .text.substr(0, position.character);
-                if (!linePrefix.endsWith("!-")) {
+                if (!linePrefix.endsWith("icon-")) {
                     return [];
                 }
                 const meta = yield getMetaData();
                 return [...meta].map((m) => {
                     return {
-                        label: `!-${m.name}`,
+                        label: `icon-${m.name}`,
                         insertText: m.svg,
                         kind: vscode.CompletionItemKind.Snippet,
                         sortText: m.name,
@@ -78,7 +65,7 @@ function activate(context) {
             return Object.assign(Object.assign({}, item), { documentation: new vscode.MarkdownString(`![preview](${previewSvg})`), detail: item.meta.name });
         },
     }, "-");
-    context.subscriptions.push(disposable2, completionProvider);
+    context.subscriptions.push(completionProvider);
 }
 exports.activate = activate;
 function deactivate() { }
