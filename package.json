@@ -1,87 +1,93 @@
 {
-	"name": "get-svg-icons",
-	"displayName": "get-svg-icons",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.53.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onView:get-svg-icons-sidebar",
-		"onCommand:get-svg-icons.showIcon",
-		"onCommand:get-svg-icons.showIconList"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "get-svg-icons-sidebar-view",
-					"title": "Get SVG Icon",
-					"icon": "media/checklist.svg"
-				}
-			]
-		},
-		"views": {
-			"get-svg-icons-sidebar-view": [
-				{
-					"type": "webview",
-					"id": "get-svg-icons-sidebar",
-					"name": "Sidebar",
-					"icon": "media/checklist.svg",
-					"contextualTitle": "Get SVG Icon"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "get-svg-icons.showIcon",
-				"category": "Get SVG Icons",
-				"title": "Show Icons"
-			},
-			{
-				"command": "get-svg-icons.insertText",
-				"category": "Get SVG Icons",
-				"title": "Sample command"
-			}
-		],
-		"snippets": [
-			{
-				"language": "html",
-				"path": "./snippets/snippets.json"
-			},
-			{
-				"language": "javascript",
-				"path": "./snippets/snippets.json"
-			},
-			{
-				"language": "javascriptreact",
-				"path": "./snippets/snippets.json"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.53.0",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.4",
-		"@types/node": "^12.11.7",
-		"eslint": "^7.19.0",
-		"@typescript-eslint/eslint-plugin": "^4.14.1",
-		"@typescript-eslint/parser": "^4.14.1",
-		"glob": "^7.1.6",
-		"mocha": "^8.2.1",
-		"typescript": "^4.1.3",
-		"vscode-test": "^1.5.0"
-	}
+    "name": "get-svg-icons",
+    "displayName": "get-svg-icons",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [{
+                "id": "get-svg-icons-sidebar-view",
+                "title": "Get SVG Icon",
+                "icon": "media/checklist.svg"
+            }]
+        },
+        "views": {
+            "get-svg-icons-sidebar-view": [{
+                "type": "webview",
+                "id": "get-svg-icons-sidebar",
+                "name": "Sidebar",
+                "icon": "media/checklist.svg",
+                "contextualTitle": "Get SVG Icon"
+            }]
+        },
+        "configuration": [{
+            "title": "Get Inline Svg for Icons",
+            "properties": {
+                "getSvgIcons.iconColor": {
+                    "type": "string",
+                    "default": "#bababa",
+                    "pattern": "^#([0-9a-fA-F]{3}){1,2}$",
+                    "description": "RGB color of the icon in the completion and hover docs"
+                },
+                "getSvgIcons.iconSize": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 10,
+                    "description": "Size of the icon in the completion and hover docs in pixels"
+                },
+                "getSvgIcons.selector": {
+                    "type": "array",
+                    "default": ["javascript", "typescript", "javascriptreact", "typescriptreact", "html", "vue-pug", "vue-html", "vue", "ng-template"],
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true,
+                    "description": "Defines the documents where completion and hover are active"
+                }
+            }
+        }],
+        "commands": [{
+                "command": "get-svg-icons.showIcon",
+                "category": "Get SVG Icons",
+                "title": "Show Icons"
+            },
+            {
+                "command": "get-svg-icons.insertText",
+                "category": "Get SVG Icons",
+                "title": "Sample command"
+            }
+        ]
+    },
+
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.53.0",
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.11.7",
+        "eslint": "^7.19.0",
+        "@typescript-eslint/eslint-plugin": "^4.14.1",
+        "@typescript-eslint/parser": "^4.14.1",
+        "glob": "^7.1.6",
+        "mocha": "^8.2.1",
+        "typescript": "^4.1.3",
+        "vscode-test": "^1.5.0"
+    }
 }
