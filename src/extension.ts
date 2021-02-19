@@ -64,7 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
 			let linePrefix = document
 			  .lineAt(position)
 			  .text.substr(0, position.character);
-			if (!linePrefix.endsWith("!-")) {
+			if (!linePrefix.endsWith("icon-")) {
 			  return [];
 			}
 			const meta = await getMetaData();
@@ -73,7 +73,7 @@ export function activate(context: vscode.ExtensionContext) {
 			  meta: any;
 			} => {
 			  return {
-				label: `!-${m.name}`,
+				label: `icon-${m.name}`,
 				insertText: m.svg,
 				kind: vscode.CompletionItemKind.Snippet,
 				sortText: m.name,
