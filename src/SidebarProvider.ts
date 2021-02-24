@@ -22,7 +22,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
         case "onInfo": {
-          console.log(data.value);
           if (!data.value) {
             return;
           }
