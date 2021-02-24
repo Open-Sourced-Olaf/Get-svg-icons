@@ -22,6 +22,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
         case "onInfo": {
+          console.log(data.value);
           if (!data.value) {
             return;
           }
@@ -128,10 +129,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                   </tr>
               </thead>
                   <tbody>
-                  ${Object.keys(snippets)
-                    .map((icon:any) => {
-                      const name:string = icon;
-                      return ` <tr data-icon-name="${name}" >
+                  ${Object.entries(snippets).map(([key, value]) => {
+                      const name:string = key;
+                      const description:string = value['description'].toString();
+                      return ` <tr data-icon-name="${name}" data-icon-description="${description}">
                                   <td class="icon">
                                     <i class="bi bi-${name}"></i>
                                   </td>
@@ -139,8 +140,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                                       <button onclick="addSnippet('${name}')">${name}</button>
                                   </td>
                                 </tr>`;
-                    })
-                    .join("")}
+                    }).join("")}
               </tbody>
   </table>
   </div>
@@ -148,10 +148,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   function handleInputChange(searchTerm){
     document.querySelectorAll("tr").forEach(element => {
       var iconName = element.getAttribute("data-icon-name");
+      var iconDescription = element.getAttribute("data-icon-description");
       if (iconName){
         if (searchTerm == ""){
           element.classList.remove("hidden");
-        } else if (iconName.includes(searchTerm) ){
+        } else if (iconName.includes(searchTerm) || iconDescription.includes(searchTerm)){
           element.classList.remove("hidden");
         } else {
           element.classList.add("hidden");
