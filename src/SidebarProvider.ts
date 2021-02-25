@@ -41,14 +41,17 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           }
           const editor = vscode.window.activeTextEditor;
           if (editor) {
-              const document = editor.document;
-              editor.edit(editBuilder => {
-                  editor.selections.forEach(sel => {
-                  const position = editor.selection.active;
-                  editBuilder.insert(position, snippets[data.value].body);
-                  })
-              })
-          }
+            const document = editor.document;
+            let svgString = snippets[data.value.name].body;
+            svgString = svgString.replace(/width\s*=\s*"(\d+)\"/, `width="${data.value.width}"`);
+            svgString = svgString.replace(/height\s*=\s*"(\d+)\"/, `height="${data.value.height}"`);
+            editor.edit(editBuilder => {
+                editor.selections.forEach(sel => {
+                const position = editor.selection.active;
+                editBuilder.insert(position, svgString);
+                })
+            })
+        }
           break;
         }
       }
@@ -111,6 +114,15 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
               button {
                 width: 100%;
               }
+              .dimensions {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+              }
+              .dimensions input{
+                width: 60%;
+                font-size: 0.8rem;
+              }
               </style>
               <script>
               const tsvscode = acquireVsCodeApi();
@@ -119,6 +131,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           <body>
               <h1>SVG Icons</h1>
               <input oninput="handleInputChange(this.value)" placeholder="Search" type="text"/>
+              <div class="dimensions">
+                <label for="height">Height</label>
+                <input type="number" id="height" name="height" value="16">
+                <label for="width">Width</label>
+                <input type="number" id="width" name="width" value="16">
+              </div>
               <div class="results">
               <table>
               <thead>
@@ -128,10 +146,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                   </tr>
               </thead>
                   <tbody>
-                  ${Object.keys(snippets)
-                    .map((icon:any) => {
-                      const name:string = icon;
-                      return ` <tr data-icon-name="${name}" >
+                  ${Object.entries(snippets).map(([key, value]) => {
+                      const name:string = key;
+                      const description:string = value['description'].toString();
+                      return ` <tr data-icon-name="${name}" data-icon-description="${description}">
                                   <td class="icon">
                                     <i class="bi bi-${name}"></i>
                                   </td>
@@ -139,8 +157,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                                       <button onclick="addSnippet('${name}')">${name}</button>
                                   </td>
                                 </tr>`;
-                    })
-                    .join("")}
+                    }).join("")}
               </tbody>
   </table>
   </div>
@@ -148,10 +165,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   function handleInputChange(searchTerm){
     document.querySelectorAll("tr").forEach(element => {
       var iconName = element.getAttribute("data-icon-name");
+      var iconDescription = element.getAttribute("data-icon-description");
       if (iconName){
         if (searchTerm == ""){
           element.classList.remove("hidden");
-        } else if (iconName.includes(searchTerm) ){
+        } else if (iconName.includes(searchTerm) || iconDescription.includes(searchTerm)){
           element.classList.remove("hidden");
         } else {
           element.classList.add("hidden");
@@ -160,7 +178,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     });
   }
   function addSnippet(name){
-    tsvscode.postMessage({type: 'addText', value: name});
+    const height = document.querySelector("#height").value;
+    const width = document.querySelector('#width').value;
+    tsvscode.postMessage({type: 'addText', value: {name, height, width}});
   }
   (function(){
     document.querySelector('input').focus();
