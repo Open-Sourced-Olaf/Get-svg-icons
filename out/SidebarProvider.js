@@ -47,10 +47,13 @@ class SidebarProvider {
                     const editor = vscode.window.activeTextEditor;
                     if (editor) {
                         const document = editor.document;
+                        let svgString = snippets[data.value.name].body;
+                        svgString = svgString.replace(/width\s*=\s*"(\d+)\"/, `width="${data.value.width}"`);
+                        svgString = svgString.replace(/height\s*=\s*"(\d+)\"/, `height="${data.value.height}"`);
                         editor.edit(editBuilder => {
                             editor.selections.forEach(sel => {
                                 const position = editor.selection.active;
-                                editBuilder.insert(position, snippets[data.value].body);
+                                editBuilder.insert(position, svgString);
                             });
                         });
                     }
@@ -115,6 +118,15 @@ class SidebarProvider {
               button {
                 width: 100%;
               }
+              .dimensions {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+              }
+              .dimensions input{
+                width: 60%;
+                font-size: 0.8rem;
+              }
               </style>
               <script>
               const tsvscode = acquireVsCodeApi();
@@ -123,6 +135,12 @@ class SidebarProvider {
           <body>
               <h1>SVG Icons</h1>
               <input oninput="handleInputChange(this.value)" placeholder="Search" type="text"/>
+              <div class="dimensions">
+                <label for="height">Height</label>
+                <input type="number" id="height" name="height" value="16">
+                <label for="width">Width</label>
+                <input type="number" id="width" name="width" value="16">
+              </div>
               <div class="results">
               <table>
               <thead>
@@ -164,7 +182,9 @@ class SidebarProvider {
     });
   }
   function addSnippet(name){
-    tsvscode.postMessage({type: 'addText', value: name});
+    const height = document.querySelector("#height").value;
+    const width = document.querySelector('#width').value;
+    tsvscode.postMessage({type: 'addText', value: {name, height, width}});
   }
   (function(){
     document.querySelector('input').focus();
