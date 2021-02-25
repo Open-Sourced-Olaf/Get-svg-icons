@@ -61,7 +61,10 @@
                 "category": "Get SVG Icons",
                 "title": "Show Icons"
             }
-        ]
+        ],
+        "capabilities": {
+            "hoverProvider": "true"
+          }
     },
 
     "scripts": {
