@@ -19,7 +19,6 @@ View icons from bootstrap's icon library and insert them into your code through 
 
 - Type "icon-" (without quotes) to start auto-completing icons. If the icon preview is not showing up (as shown in the GIF below), press Ctrl+Space (default hotkey) or press the  ">" icon to expand the details view.
 - An inline replacement of the selected icon with its svg will be done.
-
 ![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/screenshots/inline_icon_completion.gif)
 
 ### Icon preview on hover
@@ -58,14 +57,14 @@ To customize languages we support for inline snippet completion, icon-color and 
 ## How to run locally?
 - Clone the repository
 
-```git clone https://github.com/Open-Sourced-Olaf/Get-svg-icons.git```
+  ```git clone https://github.com/Open-Sourced-Olaf/Get-svg-icons.git```
 - Install node dependencies with ```npm install```
 - Open project with VS Code
 - Press F5 or run Launch Extension in the debug window or run ```npm run compile```
 
 ## How to contribute?
 Take a look at the [contribution guidelines](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git
-) and open a [new issue](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git/issues) or [pull request](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git/pulls) on GitHub.
+) and open a [new issue](https://github.com/Open-Sourced-Olaf/Get-svg-icons/issues) or [pull request](https://github.com/Open-Sourced-Olaf/Get-svg-icons/pulls) on GitHub.
 
 ## Release Notes
 
