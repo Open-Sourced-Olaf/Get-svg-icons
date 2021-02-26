@@ -80,7 +80,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
     },
   });
-  
+
   const completionProvider = vscode.languages.registerCompletionItemProvider(
     selector,
     {
@@ -91,9 +91,12 @@ export function activate(context: vscode.ExtensionContext) {
         let linePrefix = document
           .lineAt(position)
           .text.substr(0, position.character);
-        if (!linePrefix.endsWith("icon-")) {
+
+        const match = linePrefix.match(/icon(-)?/);
+        if (!match) {
           return [];
         }
+
         const meta = await getMetaData();
 
         return [...meta].map((m): vscode.CompletionItem & {
@@ -105,6 +108,16 @@ export function activate(context: vscode.ExtensionContext) {
             kind: vscode.CompletionItemKind.Snippet,
             sortText: m.name,
             meta: m,
+            additionalTextEdits: [
+              vscode.TextEdit.delete(
+                new vscode.Range(
+                  position.line,
+                  position.character - match[0].length,
+                  position.line,
+                  position.character
+                )
+              ),
+            ],
           };
         });
       },
