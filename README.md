@@ -57,14 +57,14 @@ To customize languages we support for inline snippet completion, icon-color and 
 ## How to run locally?
 - Clone the repository
 
-```git clone https://github.com/Open-Sourced-Olaf/Get-svg-icons.git```
+  ```git clone https://github.com/Open-Sourced-Olaf/Get-svg-icons.git```
 - Install node dependencies with ```npm install```
 - Open project with VS Code
 - Press F5 or run Launch Extension in the debug window or run ```npm run compile```
 
 ## How to contribute?
 Take a look at the [contribution guidelines](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git
-) and open a [new issue](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git/issues) or [pull request](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git/pulls) on GitHub.
+) and open a [new issue](https://github.com/Open-Sourced-Olaf/Get-svg-icons/issues) or [pull request](https://github.com/Open-Sourced-Olaf/Get-svg-icons/pulls) on GitHub.
 
 ## Release Notes
 
