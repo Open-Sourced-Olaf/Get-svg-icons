@@ -2,12 +2,13 @@
     "name": "get-svg-icons",
     "displayName": "get-svg-icons",
     "description": "View icons from bootstrap's icon library and get their corresponding SVG snippets",
-    "version": "0.0.1",
+    "version": "0.0.3",
+    "publisher": "marcochan",
     "repository": {
         "type": "git",
         "url": "https://github.com/Open-Sourced-Olaf/Get-svg-icons"
     },
-    "icon" : "./media/svg-icon-3.png",
+    "icon" : "media/svg-icon-3.png",
     "engines": {
         "vscode": "^1.53.0"
     },
