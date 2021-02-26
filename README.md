@@ -10,9 +10,9 @@ View icons from bootstrap's icon library and insert them into your code through 
 ### Side Panel with customizable icons
 
 - Side Panel with around 1300+ icons
-- Users can search (font_name or tags associated with it) and choose the desired icon
-- An inline replacement of the icon with its corresponding svg in the code editor on the desired line of code.
-- Users can change the height and width of the svg directly from the side-panel
+- Users can search for the icon-name (or tags associated with it) and choose the desired icon
+- On clicking on the icon, corresponding svg code will be inserted at the last active position on the code editor
+- Users can change the height and width of the svg directly from the side panel
 ![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/Images/side-panel.gif)
 
 ### Inline Icon suggestions
