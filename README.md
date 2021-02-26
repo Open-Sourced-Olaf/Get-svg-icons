@@ -1,16 +1,28 @@
-# get-svg-icons README
-
-This is the README for your extension "get-svg-icons". After writing up a brief description, we recommend including the following sections.
+# Get Svg Icons
+A VS code extension for inline replacement of icons to svg
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Side Panel with customizable icons
 
-For example if there is an image subfolder under your extension project workspace:
+- Side Panel with around 1300+ icons
+- Users could search (font_name or tags associated with it) and choose the desired icon
+- An inline replacement of the icon with its corresponding svg in the code editor on the desired line of code.
 
-\!\[feature X\]\(images/feature-x.png\)
+![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/Images/side-panel.gif)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Inline Icon suggestions
+
+- Type "icon-" (without quotes) to start auto-completing icons. If the icon preview is not showing up (as shown in the GIF below), press Ctrl+Space (default hotkey) or press the  ">" icon to expand the details view.
+- An inline replacement of the selected icon with its svg will be done.
+
+![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/Images/inline_icon_completion.gif)
+
+## Mouse Over Icon Preview
+- On hovering over the svg code (class name) , You can preview the icon of the corresponding svg.
+
+
+## Installation
 
 ## Requirements
 
@@ -27,39 +39,33 @@ This extension contributes the following settings:
 * `myExtension.enable`: enable/disable this extension
 * `myExtension.thing`: set to `blah` to do something
 
+## Release Notes
+
+### 1.0.0
+
+Initial release of the extension
+
+## Icon sources
+- [Bootstrap Icons](https://github.com/twbs/icons)
+## Prefixes
+
+| Prefix         | SVG Icons                           | Version |
+|----------------|-------------------------------------|---------|
+| `icon-`           | Bootstrap Icons              | 1.0     |
+
+
 ## Known Issues
 
 Calling out known issues can help limit users opening duplicate issues against your extension.
 
-## Release Notes
+## Contributors
 
-Users appreciate release notes as you update your extension.
 
-### 1.0.0
 
-Initial release of ...
+## Contributing
 
-### 1.0.1
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
 
 -----------------------------------------------------------------------------------------------------------
 
-## Working with Markdown
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
