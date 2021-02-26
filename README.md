@@ -19,7 +19,6 @@ View icons from bootstrap's icon library and insert them into your code through 
 
 - Type "icon-" (without quotes) to start auto-completing icons. If the icon preview is not showing up (as shown in the GIF below), press Ctrl+Space (default hotkey) or press the  ">" icon to expand the details view.
 - An inline replacement of the selected icon with its svg will be done.
-
 ![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/screenshots/inline_icon_completion.gif)
 
 ### Icon preview on hover
