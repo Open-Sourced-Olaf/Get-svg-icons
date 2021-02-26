@@ -1,14 +1,18 @@
 # Get Svg Icons
-A VS code extension for inline replacement of icons to svg
+View icons from bootstrap's icon library and insert them into your code through snippets.
+
+## Installation
+
+- Go to VS Marketplace https://marketplace.visualstudio.com/items?itemName=marcochan.get-svg-icons to install the extension
 
 ## Features
 
 ### Side Panel with customizable icons
 
 - Side Panel with around 1300+ icons
-- Users could search (font_name or tags associated with it) and choose the desired icon
+- Users can search (font_name or tags associated with it) and choose the desired icon
 - An inline replacement of the icon with its corresponding svg in the code editor on the desired line of code.
-
+- Users can change the height and width of the svg directly from the side-panel
 ![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/Images/side-panel.gif)
 
 ### Inline Icon suggestions
@@ -18,53 +22,56 @@ A VS code extension for inline replacement of icons to svg
 
 ![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/Images/inline_icon_completion.gif)
 
-## Mouse Over Icon Preview
-- On hovering over the svg code (class name) , You can preview the icon of the corresponding svg.
+### Mouse Over Icon Preview
+- On hovering over the svg code (class name) , you can preview the icon of the corresponding svg snippet
 
-
-## Installation
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Built with:
+- Typescript
+- VS Code API
+- Python for web-scraping
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+To customize languages we support for inline snippet completion, icon-color and icon-size for hover preview
 
-For example:
+- Navigate to extension settings
+- Choose ```Extension Settings```
+- From here, you can customize ```getSvgIcons.iconColor```, ```getSvgIcons.iconSize``` and ```getSvgIcons.selector```
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Release Notes
-
-### 1.0.0
-
-Initial release of the extension
-
-## Icon sources
+## Icon source
 - [Bootstrap Icons](https://github.com/twbs/icons)
+
 ## Prefixes
 
 | Prefix         | SVG Icons                           | Version |
 |----------------|-------------------------------------|---------|
 | `icon-`           | Bootstrap Icons              | 1.0     |
 
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
 ## Contributors
 
+- [Bodhisha Thomas](https://github.com/bodhisha)
+- [Marco Chan](https://github.com/m2chan)
+- [Rashi Sharma](https://github.com/rashi-s17)
+- [Steven Tey](https://github.com/steven-tey)
+- [Sumi Kolli](https://github.com/sgkolli535)
 
+## How to run locally?
+- Clone the repository
 
-## Contributing
+```git clone https://github.com/Open-Sourced-Olaf/Get-svg-icons.git```
+- Install node dependencies with ```npm install```
+- Open project with VS Code
+- Press F5 or run Launch Extension in the debug window or run ```npm run compile```
 
+## How to contribute?
+Take a look at the [contribution guidelines](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git
+) and open a [new issue](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git/issues) or [pull request](https://github.com/Open-Sourced-Olaf/Get-svg-icons.git/pulls) on GitHub.
 
+## Release Notes
+
+### 1.0.0
+
+Initial release of the extension
 
 -----------------------------------------------------------------------------------------------------------
 
