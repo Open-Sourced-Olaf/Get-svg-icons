@@ -13,13 +13,13 @@ View icons from bootstrap's icon library and insert them into your code through 
 - Users can search for the icon-name (or tags associated with it) and choose the desired icon
 - On clicking on the icon, corresponding svg code will be inserted at the last active position on the code editor
 - Users can change the height and width of the svg directly from the side panel
-![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/screenshots/side-panel.gif)
+![demo](https://raw.githubusercontent.com/anjalisoni3655/Get-svg-icons/staging/screenshots/inline_icon_completion.gif)
 
 ### Inline Icon suggestions
 
 - Type "icon-" (without quotes) to start auto-completing icons. If the icon preview is not showing up (as shown in the GIF below), press Ctrl+Space (default hotkey) or press the  ">" icon to expand the details view.
 - An inline replacement of the selected icon with its svg will be done.
-![demo](https://github.com/Open-Sourced-Olaf/Get-svg-icons/blob/staging/screenshots/inline_icon_completion.gif)
+![demo](https://raw.githubusercontent.com/Open-Sourced-Olaf/Get-svg-icons/staging/screenshots/side-panel.gif)
 
 ### Icon preview on hover
 - On hovering over the svg code (class name) , you can preview the icon of the corresponding svg snippet
