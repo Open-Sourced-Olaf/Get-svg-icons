@@ -13,7 +13,7 @@ View icons from bootstrap's icon library and insert them into your code through 
 - Users can search for the icon-name (or tags associated with it) and choose the desired icon
 - On clicking on the icon, corresponding svg code will be inserted at the last active position on the code editor
 - Users can change the height and width of the svg directly from the side panel
-![demo](https://raw.githubusercontent.com/anjalisoni3655/Get-svg-icons/staging/screenshots/side-panel.gif)
+![demo](https://raw.githubusercontent.com/Open-Sourced-Olaf/Get-svg-icons/staging/screenshots/side-panel.gif)
 
 
 ### Inline Icon suggestions
