@@ -45,6 +45,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             let svgString = snippets[data.value.name].body;
             svgString = svgString.replace(/width\s*=\s*"(\d+)\"/, `width="${data.value.width}"`);
             svgString = svgString.replace(/height\s*=\s*"(\d+)\"/, `height="${data.value.height}"`);
+            svgString = svgString.replace(/fill\s*=\s*"(\w+)\"/, `fill="${data.value.color}"`);
             editor.edit(editBuilder => {
                 editor.selections.forEach(sel => {
                 const position = editor.selection.active;
@@ -137,6 +138,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 <label for="width">Width</label>
                 <input type="number" id="width" name="width" value="16">
               </div>
+              <div class="dimensions">
+                <label for="color">Icon-Color</label>
+                <input type="color" id="color" name="color" value="#bababa">
+              </div>
               <div class="results">
               <table>
               <thead>
@@ -180,7 +185,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   function addSnippet(name){
     const height = document.querySelector("#height").value;
     const width = document.querySelector('#width').value;
-    tsvscode.postMessage({type: 'addText', value: {name, height, width}});
+    const color = document.querySelector('#color').value;
+    tsvscode.postMessage({type: 'addText', value: {name, height, width, color}});
   }
   (function(){
     document.querySelector('input').focus();
