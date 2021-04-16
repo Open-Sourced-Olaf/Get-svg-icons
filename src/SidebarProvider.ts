@@ -1,11 +1,22 @@
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 import snippets = require('./icons.json');
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
+  context?: vscode.ExtensionContext;
 
-  constructor(private readonly _extensionUri: vscode.Uri) {}
+  constructor(
+    private readonly _extensionUri: vscode.Uri,
+    _context: vscode.ExtensionContext
+  ) {
+    this.context = _context;
+    let favorites: Array<string> =
+      this.context?.globalState.get('favorites') ?? [];
+    Object.keys(snippets).forEach((snippet) => {
+      snippets[snippet]['favorite'] = favorites.includes(snippet);
+    });
+  }
 
   public resolveWebviewView(webviewView: vscode.WebviewView) {
     this._view = webviewView;
@@ -21,21 +32,21 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
-        case "onInfo": {
+        case 'onInfo': {
           if (!data.value) {
             return;
           }
           vscode.window.showInformationMessage(data.value);
           break;
         }
-        case "onError": {
+        case 'onError': {
           if (!data.value) {
             return;
           }
           vscode.window.showErrorMessage(data.value);
           break;
         }
-        case "addText": {
+        case 'addText': {
           if (!data.value) {
             return;
           }
@@ -43,17 +54,37 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           if (editor) {
             const document = editor.document;
             let svgString = snippets[data.value.name].body;
-            svgString = svgString.replace(/width\s*=\s*"(\d+)\"/, `width="${data.value.width}"`);
-            svgString = svgString.replace(/height\s*=\s*"(\d+)\"/, `height="${data.value.height}"`);
-            svgString = svgString.replace(/fill\s*=\s*"(\w+)\"/, `fill="${data.value.color}"`);
-            editor.edit(editBuilder => {
-                editor.selections.forEach(sel => {
+            svgString = svgString.replace(
+              /width\s*=\s*"(\d+)\"/,
+              `width="${data.value.width}"`
+            );
+            svgString = svgString.replace(
+              /height\s*=\s*"(\d+)\"/,
+              `height="${data.value.height}"`
+            );
+            svgString = svgString.replace(
+              /fill\s*=\s*"(\w+)\"/,
+              `fill="${data.value.color}"`
+            );
+            editor.edit((editBuilder) => {
+              editor.selections.forEach((sel) => {
                 const position = editor.selection.active;
                 editBuilder.insert(position, svgString);
-                })
-            })
-        }
+              });
+            });
+          }
           break;
+        }
+        case 'toggleFavorite': {
+          let favorites: Array<string> =
+            this.context?.globalState.get('favorites') ?? [];
+          let index: number = favorites.indexOf(data.value.name);
+          if (index >= 0) {
+            favorites.splice(index, 1);
+          } else {
+            favorites.push(data.value.name);
+          }
+          this.context?.globalState.update('favorites', favorites);
         }
       }
     });
@@ -76,6 +107,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
               .icon {
                   padding: 2px 6px;
                   font-size: 1.6rem;
+              }
+              .favorite {
               }
               .hidden {
                   display: none;
@@ -148,12 +181,18 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                   <tr>
                   <th>Icon</th>
                   <th>Icon name</th>
+                  <th>Favorite</th>
                   </tr>
               </thead>
                   <tbody>
-                  ${Object.entries(snippets).map(([key, value]) => {
-                      const name:string = key;
-                      const description:string = value['description'].toString();
+                  ${Object.entries(snippets)
+                    .map(([key, value]) => {
+                      const name: string = key;
+                      const description: string = value[
+                        'description'
+                      ].toString();
+                      const favorite: boolean = value['favorite'];
+                      console.log(favorite);
                       return ` <tr data-icon-name="${name}" data-icon-description="${description}">
                                   <td class="icon">
                                     <i class="bi bi-${name}"></i>
@@ -161,8 +200,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                                   <td class="icon-name">
                                       <button onclick="addSnippet('${name}')">${name}</button>
                                   </td>
+                                  <td class="favorite">
+                                      <input type="checkbox" value="${name}" onclick="toggleFavorite('${name}')" ${
+                        favorite ? 'checked' : ''
+                      }/>
+                                  </td>
                                 </tr>`;
-                    }).join("")}
+                    })
+                    .join('')}
               </tbody>
   </table>
   </div>
@@ -187,6 +232,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     const width = document.querySelector('#width').value;
     const color = document.querySelector('#color').value;
     tsvscode.postMessage({type: 'addText', value: {name, height, width, color}});
+  }
+  function toggleFavorite(name){
+    tsvscode.postMessage({type: 'toggleFavorite', value: {name}});
   }
   (function(){
     document.querySelector('input').focus();

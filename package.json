@@ -8,7 +8,7 @@
         "type": "git",
         "url": "https://github.com/Open-Sourced-Olaf/Get-svg-icons"
     },
-    "icon" : "media/svg-icon-3.png",
+    "icon": "media/svg-icon-3.png",
     "engines": {
         "vscode": "^1.53.0"
     },
@@ -21,48 +21,65 @@
     "main": "./out/extension.js",
     "contributes": {
         "viewsContainers": {
-            "activitybar": [{
-                "id": "get-svg-icons-sidebar-view",
-                "title": "Get SVG Icon",
-                "icon": "media/checklist.svg"
-            }]
+            "activitybar": [
+                {
+                    "id": "get-svg-icons-sidebar-view",
+                    "title": "Get SVG Icon",
+                    "icon": "media/checklist.svg"
+                }
+            ]
         },
         "views": {
-            "get-svg-icons-sidebar-view": [{
-                "type": "webview",
-                "id": "get-svg-icons-sidebar",
-                "name": "Sidebar",
-                "icon": "media/checklist.svg",
-                "contextualTitle": "Get SVG Icon"
-            }]
+            "get-svg-icons-sidebar-view": [
+                {
+                    "type": "webview",
+                    "id": "get-svg-icons-sidebar",
+                    "name": "Sidebar",
+                    "icon": "media/checklist.svg",
+                    "contextualTitle": "Get SVG Icon"
+                }
+            ]
         },
-        "configuration": [{
-            "title": "Get Inline Svg for Icons",
-            "properties": {
-                "getSvgIcons.iconColor": {
-                    "type": "string",
-                    "default": "#bababa",
-                    "pattern": "^#([0-9a-fA-F]{3}){1,2}$",
-                    "description": "RGB color of the icon in the completion and hover docs"
-                },
-                "getSvgIcons.iconSize": {
-                    "type": "integer",
-                    "default": 100,
-                    "minimum": 10,
-                    "description": "Size of the icon in the completion and hover docs in pixels"
-                },
-                "getSvgIcons.selector": {
-                    "type": "array",
-                    "default": ["javascript", "typescript", "javascriptreact", "typescriptreact", "html", "vue-pug", "vue-html", "vue", "ng-template"],
-                    "items": {
-                        "type": "string"
+        "configuration": [
+            {
+                "title": "Get Inline Svg for Icons",
+                "properties": {
+                    "getSvgIcons.iconColor": {
+                        "type": "string",
+                        "default": "#bababa",
+                        "pattern": "^#([0-9a-fA-F]{3}){1,2}$",
+                        "description": "RGB color of the icon in the completion and hover docs"
                     },
-                    "uniqueItems": true,
-                    "description": "Defines the documents where completion and hover are active"
+                    "getSvgIcons.iconSize": {
+                        "type": "integer",
+                        "default": 100,
+                        "minimum": 10,
+                        "description": "Size of the icon in the completion and hover docs in pixels"
+                    },
+                    "getSvgIcons.selector": {
+                        "type": "array",
+                        "default": [
+                            "javascript",
+                            "typescript",
+                            "javascriptreact",
+                            "typescriptreact",
+                            "html",
+                            "vue-pug",
+                            "vue-html",
+                            "vue",
+                            "ng-template"
+                        ],
+                        "items": {
+                            "type": "string"
+                        },
+                        "uniqueItems": true,
+                        "description": "Defines the documents where completion and hover are active"
+                    }
                 }
             }
-        }],
-        "commands": [{
+        ],
+        "commands": [
+            {
                 "command": "get-svg-icons.showIcon",
                 "category": "Get SVG Icons",
                 "title": "Show Icons"
@@ -70,9 +87,8 @@
         ],
         "capabilities": {
             "hoverProvider": "true"
-          }
+        }
     },
-
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
@@ -82,13 +98,13 @@
         "test": "node ./out/test/runTest.js"
     },
     "devDependencies": {
-        "@types/vscode": "^1.53.0",
         "@types/glob": "^7.1.3",
         "@types/mocha": "^8.0.4",
         "@types/node": "^12.11.7",
-        "eslint": "^7.19.0",
+        "@types/vscode": "^1.53.0",
         "@typescript-eslint/eslint-plugin": "^4.14.1",
         "@typescript-eslint/parser": "^4.14.1",
+        "eslint": "^7.19.0",
         "glob": "^7.1.6",
         "mocha": "^8.2.1",
         "typescript": "^4.1.3",
